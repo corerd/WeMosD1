@@ -10,4 +10,4 @@ Since "git 1.7.10":https://lkml.org/lkml/2012/3/28/418 (April 2012) git allows y
 
 h2. CREDITS
 
-"Setup GitHub Pages":https://gist.github.com/chrisjacob/833223 *gh-pages* and *master* branches as subfolders of a parent project folder] by "Chris Jacob":https://gist.github.com/chrisjacob
+"Setup GitHub Pages":https://gist.github.com/chrisjacob/833223 *gh-pages* and *master* branches as subfolders of a parent project folder by "Chris Jacob":https://gist.github.com/chrisjacob.
