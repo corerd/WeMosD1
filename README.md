@@ -1,1 +1,1 @@
-WeMos D1 mini pro
+WeMosD1 gh-pages
