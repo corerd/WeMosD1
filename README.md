@@ -20,7 +20,7 @@ See [WeMos](https://www.wemos.cc/product/d1-mini-pro.html) official web site for
 - Same size as D1 mini, but more light
 
 
-Technical specs |
+Technical specs   ||
 ----------------- | ------------------:
 Microcontroller   | ESP-8266EX
 Operating Voltage | 3.3V
