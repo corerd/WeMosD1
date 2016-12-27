@@ -51,3 +51,7 @@ G   | Ground                        | GND
 5V  | 5V                            | -
 3V3 | 3.3V                          | 3.3V
 RST | Reset                         | RST
+
+All of the IO pins have interrupt/pwm/I2C/one-wire support except D0.
+
+All of the IO pins run at 3.3V.
