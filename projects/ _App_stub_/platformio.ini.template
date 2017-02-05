@@ -1,0 +1,21 @@
+; PlatformIO Project Configuration File
+;
+;   Build options: build flags, source filter
+;   Upload options: custom upload port, speed and extra flags
+;   Library options: dependencies, extra library storages
+;   Advanced options: extra scripting
+;
+; Please visit documentation for the other options and examples
+; http://docs.platformio.org/page/projectconf.html
+
+[env:d1_mini]
+platform = espressif8266
+board = d1_mini
+framework = arduino
+
+;; Customized env
+; extra directory where Library Dependency Finder (LDF) will look for dependencies.
+lib_extra_dirs = /absolute/path/to/WeMosD1/libraries
+
+; uploader connection speed (baud rate) used to send firmware to board.
+upload_speed = 921600
