@@ -1,5 +1,11 @@
 h1. WeMosD1 project site
 
+"Setup GitHub Pages":https://gist.github.com/chrisjacob/833223 *gh-pages* and *master* branches as subfolders of a parent project folder.
+
+*CREDITS*
+"Chris Jacob":https://gist.github.com/chrisjacob.
+
+
 h2. Using GitHub Pages
 
 On any regular repository, the *gh-pages* branch has a special meaning for GitHub: any content pushed here, will automatically published to the project GitHub Pages.
@@ -8,6 +14,25 @@ The instructions can be found at "Creating Project Pages manually":https://help.
 
 Since "git 1.7.10":https://lkml.org/lkml/2012/3/28/418 (April 2012) git allows you to clone only one branch by means of the new `--single-branch` option.
 
-h2. CREDITS
 
-"Setup GitHub Pages":https://gist.github.com/chrisjacob/833223 *gh-pages* and *master* branches as subfolders of a parent project folder by "Chris Jacob":https://gist.github.com/chrisjacob.
+h2. Folder structure
+
+/path/to/WeMosD1-workspace                # parent of "gh-pages" and "master" subfolders
+/path/to/WeMosD1-workspace/gh-pages
+/path/to/WeMosD1-workspace/gh-pages/.git  # checkout of "gh-pages" branch (removed "master" branch)
+/path/to/WeMosD1-workspace/WeMosD1
+/path/to/WeMosD1-workspace/WeMosD1/.git   # checkout of "master" branch
+
+
+h2. Cloning
+
+cd /path/to/WeMosD1-workspace
+
+With HTTPS URL
+git clone -b gh-pages --single-branch https://github.com/corerd/WeMosD1.git gh-pages  # clone "gh-pages" branch
+git clone -b master --single-branch https://github.com/corerd/WeMosD1.git             # clone "master" branch
+
+With SSH URL
+git clone -b gh-pages --single-branch git@github.com:corerd/WeMosD1.git gh-pages  # clone "gh-pages" branch
+git clone -b master --single-branch git@github.com:corerd/WeMosD1.git             # clone "master" branch
+
