@@ -5,7 +5,8 @@ The D1 mini Pro is a mini wifi board based on ESP-8266EX.
 
 ![user input clear](https://corerd.github.io/WeMosD1/img/D1-mini-pro.jpg)
 
-See [WeMos](https://www.wemos.cc/product/d1-mini-pro.html) official web site for full documentation.
+See [WeMos](https://www.wemos.cc/product/d1-mini-pro.html) official web site
+for full documentation.
 
 
 **Features**:
@@ -55,3 +56,109 @@ RST | Reset                         | RST
 All of the IO pins have interrupt/pwm/I2C/one-wire support except D0.
 
 All of the IO pins run at 3.3V.
+
+
+
+PlatformIO IDE for Atom
+=============================
+
+Repository directory structure
+------------------------------
+
+    +-- WeMosD1
+    |   +-- libraries
+    |   |   +-- _Lib_stub_
+    |   |       +-- src
+    |   |           +- _Lib_stub_.c
+    |   |           +- _Lib_stub_.h
+    |   +-- projects
+    |   |   +-- _App_stub_
+    |   |       +-- lib
+    |   |       |   +-- readme.txt
+    |   |       +-- src
+    |   |       |   +-- main.cpp
+    |   |       +-- platformio.ini
+
+
+**./libraries**
+
+Extra libraries directories root where PlatformIO Library Dependency Finder (LDF)
+will look for dependencies.
+
+Set *lib_extra_dirs* LDF option to libraries absolute path in platformio.ini
+(see below).
+
+
+**./libraries/\_Lib\_stub\_**
+
+\_Lib\_stub\_ library directory root.
+
+
+**./libraries/\_Lib\_stub\_/src**
+
+Source code of \_Lib\_stub\_ library.
+
+
+**./projects**
+
+PlatformIO projects directories root.
+
+
+**./projects/\_App\_stub\_**
+
+\_App\_stub\_ project directory root.
+
+
+**./projects/\_App\_stub\_/src**
+
+Source code of the project.
+
+**./projects/\_App\_stub\_/lib**
+
+This directory can be used to store the project specific (private) libraries.
+
+More details are located in **lib/readme.txt** file.
+
+
+**./projects/\_App\_stub\_/platformio.ini**
+
+\_App\_stub\_ project configuration file.
+
+Append the following lines to the default platformio.ini:
+```
+; extra directory where Library Dependency Finder (LDF) will look for dependencies.
+lib_extra_dirs = /absolute/path/to/WeMosD1/libraries
+
+; uploader connection speed (baud rate) used to send firmware to board.
+upload_speed = 921600
+```
+
+
+PlatformIO IDE Setup
+--------------------
+
+Launch Atom editor and add a project folder (i.e. WeMosD1):
+```
+File > "Add Project Folder..." > /path/to/WeMosD1
+```
+
+Create the directories:
+```
+./libraries
+./libraries/_Lib_stub_
+./projects
+```
+
+Create a PlatformIO project:
+```
+PlatformIO > "Initialize or Update PlatformIO Project"
+```
+
+The **PlatformIO: Initialize or Update PlatformIO Project** dialog should result:
+```
+Selected board:
+WeMos D1 R2 & mini
+
+Choose the directory:
+/absolute/path/to/WeMosD1/projects/_App_stub_
+```
