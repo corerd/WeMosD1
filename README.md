@@ -59,25 +59,31 @@ All of the IO pins run at 3.3V.
 
 
 
-PlatformIO IDE for Atom
+PlatformIO IDE
 =============================
+I choose [PlatformIO IDE](http://platformio.org/platformio-ide) as integrated development environment.
+
+It is a cross-platform build system running on top of [GitHub's Atom](https://atom.io) text editor.
+
+The repository directory structure complies with the need to maintain both the libraries and the projects source code.
 
 Repository directory structure
 ------------------------------
 
-    +-- WeMosD1
-    |   +-- libraries
-    |   |   +-- _Lib_stub_
-    |   |       +-- src
-    |   |           +- _Lib_stub_.c
-    |   |           +- _Lib_stub_.h
-    |   +-- projects
-    |   |   +-- _App_stub_
-    |   |       +-- lib
-    |   |       |   +-- readme.txt
-    |   |       +-- src
-    |   |       |   +-- main.cpp
-    |   |       +-- platformio.ini
+    +--WeMosD1
+    |  +--libraries
+    |  |  +--_Lib_stub_
+    |  |     +--src
+    |  |        +- _Lib_stub_.c
+    |  |        +- _Lib_stub_.h
+    |  +--projects
+    |  |  +--_App_stub_
+    |  |  |  +--lib
+    |  |  |  |  +- readme.txt
+    |  |  |  +--src
+    |  |  |  |  +- main.cpp
+    |  |  |  +- platformio.ini
+    |  |  +- platformio.ini.template
 
 
 **./libraries**
@@ -85,7 +91,7 @@ Repository directory structure
 Extra libraries directories root where PlatformIO Library Dependency Finder (LDF)
 will look for dependencies.
 
-Set *lib_extra_dirs* LDF option to libraries absolute path in platformio.ini
+Set `lib_extra_dirs` LDF option to libraries absolute path in platformio.ini
 (see below).
 
 
@@ -104,6 +110,13 @@ Source code of \_Lib\_stub\_ library.
 PlatformIO projects directories root.
 
 
+**./projects/platformio.ini.template**
+
+PlatformIO project configuration file template.
+
+Update the project specific `platformio.ini` file with its content.
+
+
 **./projects/\_App\_stub\_**
 
 \_App\_stub\_ project directory root.
@@ -117,21 +130,24 @@ Source code of the project.
 
 This directory can be used to store the project specific (private) libraries.
 
-More details are located in **lib/readme.txt** file.
+More details are located in `lib/readme.txt` file.
 
 
 **./projects/\_App\_stub\_/platformio.ini**
 
 \_App\_stub\_ project configuration file.
 
-Append the following lines to the default platformio.ini:
+This file is created any time that PlatformIO initializes a project.
+
+Add the following lines to the `[env:d1_mini]` section:
 ```
 ; extra directory where Library Dependency Finder (LDF) will look for dependencies.
-lib_extra_dirs = /absolute/path/to/WeMosD1/libraries
+lib_extra_dirs = ../../libraries
 
 ; uploader connection speed (baud rate) used to send firmware to board.
 upload_speed = 921600
 ```
+See `platformio.ini.template`.
 
 
 PlatformIO IDE Setup
@@ -154,7 +170,7 @@ Create a PlatformIO project:
 PlatformIO > "Initialize or Update PlatformIO Project"
 ```
 
-The **PlatformIO: Initialize or Update PlatformIO Project** dialog should result:
+The `PlatformIO: Initialize or Update PlatformIO Project` dialog should result:
 ```
 Selected board:
 WeMos D1 R2 & mini

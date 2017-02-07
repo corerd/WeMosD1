@@ -1,6 +1,6 @@
 # Protect sensitive information in configuration files
 # from appearing in public repositories.
-*.ini
+# *.ini
 *.json
 local/
 
