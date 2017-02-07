@@ -61,11 +61,14 @@ All of the IO pins run at 3.3V.
 
 PlatformIO IDE
 =============================
-I choose [PlatformIO IDE](http://platformio.org/platformio-ide) as integrated development environment.
+I choose [PlatformIO IDE](http://platformio.org/platformio-ide)
+as integrated development environment.
 
-It is a cross-platform build system running on top of [GitHub's Atom](https://atom.io) text editor.
+It is a cross-platform build system running on top of
+[GitHub's Atom](https://atom.io) text editor.
 
-The repository directory structure complies with the need to maintain both the libraries and the projects source code.
+The repository directory structure complies with the need to maintain
+both the libraries and the projects source code.
 
 Repository directory structure
 ------------------------------
@@ -91,8 +94,9 @@ Repository directory structure
 Extra libraries directories root where PlatformIO Library Dependency Finder (LDF)
 will look for dependencies.
 
-Set `lib_extra_dirs` LDF option to libraries absolute path in platformio.ini
-(see below).
+Edit the `platformio.ini` project configuration file and set
+[lib_extra_dirs](http://docs.platformio.org/en/latest/projectconf.html#projectconf-lib-extra-dirs)
+LDF option to libraries relative path (see below).
 
 
 **./libraries/\_Lib\_stub\_**
