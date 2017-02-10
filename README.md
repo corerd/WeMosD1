@@ -182,3 +182,5 @@ WeMos D1 R2 & mini
 Choose the directory:
 /absolute/path/to/WeMosD1/projects/_App_stub_
 ```
+Edit the `platformio.ini` project configuration file
+and set `lib_extra_dirs` LDF option to libraries relative path (see above).
