@@ -7,6 +7,7 @@
  *
  * The blue LED on the WeMos D1 mini board is connected to D4 (GPIO2).
  * It is referenced as LED_BUILTIN and it is active LOW.
+ * See this discussion: this discussion https://forum.wemos.cc/topic/774/onboard-led
  *
  * To connect an external led, follow this tutorial:
  * http://iot-playground.com/blog/2-uncategorised/38-esp8266-and-arduino-ide-blink-example
