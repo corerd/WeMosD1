@@ -9,20 +9,26 @@
   There are two variants of the attach function: attach and attach_ms.
   The first one takes period in seconds, the second one in milliseconds.
 
-  An LED connected to GPIO1 will be blinking. Use a built-in LED on ESP-01
-  or connect an external one to TXD on other boards.
+  Use the blue built-in LED on WeMos D1 Mini Pro and an external one
+  connected to one of the GPIO pins.
 */
 
-#include <Ticker.h>
+#include "Arduino.h"
+#include "Ticker.h"
+#include "LedCtrl.h"
 
 Ticker flipper;
+
+LedCtrl ledBuiltIn;
+LedCtrl ledRed(LED_CUSTOM);
+
 
 int count = 0;
 
 void flip()
 {
-  int state = digitalRead(1);  // get the current state of GPIO1 pin
-  digitalWrite(1, !state);     // set pin to the opposite state
+  ledBuiltIn.toggle();
+  ledRed.toggle();
 
   ++count;
   // when the counter reaches a certain value, start blinking like crazy
@@ -38,8 +44,8 @@ void flip()
 }
 
 void setup() {
-  pinMode(1, OUTPUT);
-  digitalWrite(1, LOW);
+  ledBuiltIn.on();
+  ledRed.off();
 
   // flip the pin every 0.3s
   flipper.attach(0.3, flip);
