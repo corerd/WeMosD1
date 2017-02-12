@@ -36,10 +36,11 @@ void flip()
   {
     flipper.attach(0.1, flip);
   }
-  // when the counter reaches yet another value, stop blinking
+  // when the counter reaches yet another value, restore low blinking freq
   else if (count == 120)
   {
-    flipper.detach();
+    count = 0;
+    flipper.attach(0.3, flip);
   }
 }
 
