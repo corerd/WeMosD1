@@ -12,7 +12,7 @@
 #include <MadgwickAHRS.h>
 
 
-#define         DEVICE_NAME     "/dev/ttyACM0"
+#define         DEVICE_NAME     "/dev/ttyUSB0"
 
 
 
