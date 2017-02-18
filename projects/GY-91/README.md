@@ -6,7 +6,7 @@ is a 4 in 1 Multi-Sensor Module achieving 10 Degree Of Freedom (DOF).
 It has Gyroscope, Accelerometer, Magnetic Compass and Pressure sensor
 all on single breakout board with I2C and SPI communication interface.
 
-![user input clear](https://corerd.github.io/WeMosD1/img/gy91.jpg)
+![image](https://corerd.github.io/WeMosD1/img/GY-91.jpg)
 
 The module combines the [InvenSense MPU-9250](https://www.invensense.com/products/motion-tracking/9-axis/mpu-9250/)
 Inertia Measurement Unit (IMU) together with the
@@ -48,7 +48,9 @@ SDO/SAO | SPI Data output / I2C Slave Address configuration pin
 Connecting to the WeMos D1 Mini using I2C the interface
 =======================================================
 
-The minimal setup requires four wires to communicate with the chips on the board.
+The minimal setup requires four wires to communicate with the sensors on the board.
+
+![image](https://corerd.github.io/WeMosD1/img/GY-D1.jpg)
 
 WeMosD1 Pin | Function                | GY-91 Pin
 ----------- | ----------------------- | ---------
@@ -66,7 +68,7 @@ using the `3V3` pin which bypasses the on-board 3.3V regulator and level shiftin
 
 I2C Addressing
 --------------
-The slave addresses of any of the chips on the GY-91 module are 7 bits long.
+The slave addresses of any of the sensors on the GY-91 module are 7 bits long.
 
 The LSB bit of the 7 bit address is determined by the logic level on `SA0` pin.
 
@@ -75,7 +77,7 @@ directly from the host.
 In this configuration the slave address for the AK8963 is always **0x0C**
 and doesn't depend on the logic level on `SA0` pin.
 
-Leaving the `SA0` pin unconnected (logic level 0), the chip addresses are:
+Leaving the `SA0` pin unconnected (logic level 0), the sensors addresses are:
 
 Device           | Address
 ---------------- | ------
