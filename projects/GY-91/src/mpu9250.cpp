@@ -8,8 +8,9 @@
  */
 
 #include "Arduino.h"
-#include <Wire.h>
+//#include <Wire.h>
 //#include <TimerOne.h>
+#include "I2Cdev.h"
 
 /*
  * 10DOF - GY-91 4-in-1 MPU-9250 and BMP280 Multi-Sensor Module
@@ -60,6 +61,8 @@ int custom_led = D0;
 // Put read bytes starting at register Register in the Data array.
 void I2Cread(uint8_t Address, uint8_t Register, uint8_t Nbytes, uint8_t* Data)
 {
+  I2Cdev::readBytes(Address, Register, Nbytes, Data, 0);
+/*
   // Set register address
   Wire.beginTransmission(Address);
   Wire.write(Register);
@@ -70,17 +73,21 @@ void I2Cread(uint8_t Address, uint8_t Register, uint8_t Nbytes, uint8_t* Data)
   uint8_t index=0;
   while (Wire.available())
     Data[index++]=Wire.read();
+*/
 }
 
 
 // Write a byte (Data) in device (Address) at register (Register)
 void I2CwriteByte(uint8_t Address, uint8_t Register, uint8_t Data)
 {
+  I2Cdev::writeBytes(Address, Register, 1, &Data);
+/*
   // Set register address
   Wire.beginTransmission(Address);
   Wire.write(Register);
   Wire.write(Data);
   Wire.endTransmission();
+*/
 }
 
 
