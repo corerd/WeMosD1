@@ -60,7 +60,7 @@ All of the IO pins run at 3.3V.
 
 
 PlatformIO IDE
-=============================
+==============
 I choose [PlatformIO IDE](http://platformio.org/platformio-ide)
 as integrated development environment.
 
@@ -184,3 +184,50 @@ Choose the directory:
 ```
 Edit the `platformio.ini` project configuration file
 and set `lib_extra_dirs` LDF option to libraries relative path (see above).
+
+
+PlatformIO integration with Qt Creator
+======================================
+See [PlatformIO Creator](http://docs.platformio.org/en/latest/ide/qtcreator.html)
+official page for more detailed information.
+
+Fist of all, add the folder where is located `platformio` program
+to system **PATH**.
+
+Choose board `ID` using [platformio boards](http://docs.platformio.org/en/latest/userguide/cmd_boards.html#cmd-boards)
+or [Embedded Boards Explorer](http://platformio.org/boards)
+and generate project via `platformio init --ide` command.
+
+```
+# Generate project for WeMos D1 Mini
+platformio init --ide qtcreator --board d1_mini
+```
+Among other stuff, `platformio` generates the `platformio.pro`.
+You are free to rename it as your preferences, such as `yourProject.pro`.
+
+Import project via `File > Open File or Project` and select `platformio.pro`
+from the folder where is located Project Configuration File `platformio.ini`.
+
+Select default desktop kit and click on `Configure Project`
+(`Projects` mode, left panel).
+
+Set `General > Build` directory to the project directory
+where is located Project Configuration File `platformio.ini`.
+
+Remove all items from `Build Steps`,
+click on `Build Steps > Add Build Step > Custom Process Step` and set:
+- **Command**: `platformio`
+- **Arguments**: `-f -c qtcreator run`
+- **Working directory**: `%{buildDir}`
+
+Remove all items from `Clean Steps`,
+click on `Clean Steps > Add Clean Step > Custom Process Step` and set:
+- **Command**: `platformio`
+- **Arguments**: `-f -c qtcreator run --target clean`
+- **Working directory**: `%{buildDir}`
+
+**Warning**
+
+The libraries which are added, installed or used in the project
+after generating process wont be reflected in IDE.
+To fix it you need to reinitialize project using `platformio init` (repeat it).

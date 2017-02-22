@@ -1,8 +1,11 @@
-# Protect sensitive information in configuration files
+# Protect sensitive informations in configuration files
 # from appearing in public repositories.
 # *.ini
 *.json
 local/
+
+# Qt Creator (may contain sensitive informations)
+*.pro*
 
 # C extensions
 *.so
