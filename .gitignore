@@ -5,7 +5,7 @@
 local/
 
 # Qt Creator (may contain sensitive informations)
-*.pro*
+*.user
 
 # C extensions
 *.so

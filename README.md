@@ -85,6 +85,7 @@ Repository directory structure
     |  |  |  |  +- readme.txt
     |  |  |  +--src
     |  |  |  |  +- main.cpp
+    |  |  |  +- _App_stub_.pro
     |  |  |  +- platformio.ini
     |  |  +- platformio.ini.template
 
@@ -135,6 +136,11 @@ Source code of the project.
 This directory can be used to store the project specific (private) libraries.
 
 More details are located in `lib/readme.txt` file.
+
+
+**./projects/\_App\_stub\_/\_App\_stub\_.pro**
+
+Qt Creator project configuration file.
 
 
 **./projects/\_App\_stub\_/platformio.ini**
@@ -188,7 +194,7 @@ and set `lib_extra_dirs` LDF option to libraries relative path (see above).
 
 PlatformIO integration with Qt Creator
 ======================================
-See [PlatformIO Creator](http://docs.platformio.org/en/latest/ide/qtcreator.html)
+See [PlatformIO Qt Creator](http://docs.platformio.org/en/latest/ide/qtcreator.html)
 official page for more detailed information.
 
 Fist of all, add the folder where is located `platformio` program
@@ -202,6 +208,10 @@ and generate project via `platformio init --ide` command.
 # Generate project for WeMos D1 Mini
 platformio init --ide qtcreator --board d1_mini
 ```
+The project is generated under the current directory.
+You can specify another project directory via
+`platformio init -d %PATH_TO_THE_PROJECT_DIR%` command.
+
 Among other stuff, `platformio` generates the `platformio.pro`.
 You are free to rename it as your preferences, such as `yourProject.pro`.
 
@@ -231,3 +241,24 @@ click on `Clean Steps > Add Clean Step > Custom Process Step` and set:
 The libraries which are added, installed or used in the project
 after generating process wont be reflected in IDE.
 To fix it you need to reinitialize project using `platformio init` (repeat it).
+
+**Conclusion**
+
+Build the project with shortcut `Ctrl+Shift+B` or using `Menu: Build > Build All`.
+
+**Useful commands**
+```
+# process/build project from the current directory
+platformio run
+
+# upload firmware to embedded board
+platformio run --target upload
+# or
+platformio run -t upload
+
+# clean project (remove compiled files)
+platformio run --target clean
+
+# additional information
+platformio run --help
+```
