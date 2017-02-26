@@ -138,7 +138,7 @@ This directory can be used to store the project specific (private) libraries.
 More details are located in `lib/readme.txt` file.
 
 
-**./projects/\_App\_stub\_/\_App\_stub\_.pro**
+**./projects/\_App\_stub\_/\_App\_stub\_.pro [optional]**
 
 Qt Creator project configuration file.
 
