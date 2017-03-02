@@ -1,7 +1,11 @@
 WeMos D1 mini pro
 =================
 
-The D1 mini Pro is a mini wifi board based on ESP-8266EX.
+The D1 mini Pro is a mini wifi board based on [ESP-8266EX](https://espressif.com/en/products/hardware/esp8266ex/overview).
+
+ESP8266EX integrates the ultra-low power [Tensilica](https://ip.cadence.com/ipportfolio/tensilica-ip)
+L106 cache-less, no hardware divider, 32-bit micro controller (MCU),
+which is the smallest of the Xtensa RISC controllers.
 
 ![user input clear](https://corerd.github.io/WeMosD1/img/D1-mini-pro.jpg)
 
