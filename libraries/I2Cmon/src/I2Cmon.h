@@ -19,7 +19,7 @@ class I2Cmon
     I2Cmon();
 
     static void begin(const char *prompt);
-    static void process();
+    static bool process();
 };
 
 

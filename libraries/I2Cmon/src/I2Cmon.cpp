@@ -150,14 +150,24 @@ void I2Cmon::begin(const char *prompt)
     Serial.print(I2CmonPprompt);
 }
 
-void I2Cmon::process()
+/**
+ * Get a line from the input stream and process it.
+ *
+ * This function doesn't suspend waiting for the input line completion.
+ *
+ * @return true if input line complete and precessed,
+ *         false otherwise
+ */
+bool I2Cmon::process()
 {
     char *inLine;
 
+    // The readline function doesn't wait for the input line completion.
+    // It returns nullptr if the input line is not complete.
     inLine = readline();
     if (inLine == nullptr)
     {
-        return;
+        return false;
     }
     if (strlen(inLine) > 0)
     {
@@ -168,4 +178,5 @@ void I2Cmon::process()
         }
     }
     Serial.print(I2CmonPprompt);
+    return true;
 }
