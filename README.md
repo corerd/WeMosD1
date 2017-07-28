@@ -9,7 +9,7 @@ which is the smallest of the Xtensa RISC controllers.
 
 ![user input clear](https://corerd.github.io/WeMosD1/img/D1-mini-pro.jpg)
 
-See [WeMos](https://www.wemos.cc/product/d1-mini-pro.html) official web site
+See [WeMos](https://wiki.wemos.cc/products:d1:d1_mini_pro) official web site
 for full documentation.
 
 
