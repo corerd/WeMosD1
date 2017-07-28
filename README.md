@@ -38,24 +38,29 @@ Width             | 25.6mm
 Weight            | 2.5g
 
 
-Pin | Function                      | ESP-8266 Pin
---- | ----------------------------- | ------------
-TX  | TXD                           | TXD
-RX  | RXD                           | RXD
-A0  | Analog input, max 3.3V input  | A0
-D0  | IO                            | GPIO16
-D1  | IO, SCL                       | GPIO5
-D2  | IO, SDA                       | GPIO4
-D3  | IO, 10k Pull-up               | GPIO0
-D4  | IO, 10k Pull-up, BUILTIN_LED  | GPIO2
-D5  | IO, SCK                       | GPIO14
-D6  | IO, MISO                      | GPIO12
-D7  | IO, MOSI                      | GPIO13
-D8  | IO, 10k Pull-down, SS         | GPIO15
-G   | Ground                        | GND
-5V  | 5V                            | -
-3V3 | 3.3V                          | 3.3V
-RST | Reset                         | RST
+Pin Mapping
+-----------
+Thanks to [HERON'S BLOG](https://h3ron.com/post/iot-senza-senza-programmare-con-blynk-e-wemos-d1-mini/),
+the following table maps the Wemos D1 mini's pins to ESP8266 and Arduino pin numbers.
+
+Pin | Function                      | ESP-8266     | Arduino | Arduino IDE
+--- | ----------------------------- | ------------ | ------- | -----------
+TX  | IO, Serial TX                 | GPIO1,TXD    | D1      | 1
+RX  | IO, Serial RX                 | GPIO2,RXD    | D3      | 3
+A0  | Analog input, max 3.3V input  | ADC          | A0      | A0
+D0  | IO                            | GPIO16       | D16     | 16
+D1  | IO, SCL                       | GPIO5        | D5      | 5
+D2  | IO, SDA                       | GPIO4        | D4      | 4
+D3  | IO, 10k Pull-up               | GPIO0        | D0      | 0
+D4  | IO, 10k Pull-up, BUILTIN_LED  | GPIO2        | D2      | 2
+D5  | IO, SCK                       | GPIO14       | D14     | 14
+D6  | IO, MISO                      | GPIO12       | D12     | 12
+D7  | IO, MOSI                      | GPIO13       | D13     | 13
+D8  | IO, 10k Pull-down, SS         | GPIO15       | D15     | 15
+G   | Ground                        | GND          | GND     |
+5V  | 5V                            | -            | 5V      |
+3V3 | 3.3V                          | VCC          | 3.3V    |
+RST | Reset                         | RST          | RESET   |
 
 All of the IO pins have interrupt/pwm/I2C/one-wire support except D0.
 
