@@ -44,9 +44,6 @@ class BluetoothSerial : public SoftwareSerial
     BluetoothSerial();
     ~BluetoothSerial();
 
-    /// Assign Bluetooth module pin modes and initialize line speed
-    void begin(long speed);
-
     /// Get Bluetooth module status
     int status();
 };

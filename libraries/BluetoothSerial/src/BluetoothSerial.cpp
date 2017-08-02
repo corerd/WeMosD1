@@ -39,22 +39,6 @@ BluetoothSerial::~BluetoothSerial()
 }
 
 /**
- * Assign Bluetooth module pin modes and initialize line speed
- *
- * @param speed
- */
-void BluetoothSerial::begin(long speed)
-{
-    // Assign pin modes
-	pinMode(BT_RXD_PIN, INPUT);
-	pinMode(BT_TXD_PIN, OUTPUT);
-	pinMode(BT_DSR_PIN, INPUT);
-
-    // Initialize line speed
-	SoftwareSerial::begin(9600);
-}
-
-/**
  * Get Bluetooth module status
  *
  * @return HIGH or LOW
