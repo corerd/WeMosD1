@@ -32,20 +32,23 @@
 #include "Arduino.h"
 #include <SoftwareSerial.h>
 
-/// Bluetooth module interface pins
-#define BT_TXD_PIN  D5  // yellow wire
-#define BT_RXD_PIN  D6  // blue wire
-#define BT_DSR_PIN  D7  // green wire (STATUS pin)
-
 
 class BluetoothSerial : public SoftwareSerial
 {
   public:
-    BluetoothSerial();
+    BluetoothSerial(int receivePin, int transmitPin, int statusPin=-1);
     ~BluetoothSerial();
 
     /// Get Bluetooth module status
     int status();
-};
+
+  protected:
+    bool isValidPin(int pin);
+
+  private:
+    // Member variables
+    int m_statusPin;
+    bool m_statusValid;
+ };
 
 #endif /* _BLUETOOTHSERIAL_ */

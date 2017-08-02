@@ -30,8 +30,13 @@
 #include "BluetoothSerial.h"
 #include "LedCtrl.h"
 
+/// Bluetooth module interface pins
+#define BT_TXD_PIN  D5  // yellow wire
+#define BT_RXD_PIN  D6  // blue wire
+#define BT_DSR_PIN  D7  // green wire (STATUS pin)
+
 //BluetoothSerial instance
-BluetoothSerial bt = BluetoothSerial();
+BluetoothSerial bt = BluetoothSerial(BT_RXD_PIN, BT_TXD_PIN, BT_DSR_PIN);
 int bt_connected = -1;
 
 //LedCtrl instance

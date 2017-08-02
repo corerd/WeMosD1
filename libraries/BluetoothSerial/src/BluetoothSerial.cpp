@@ -28,9 +28,23 @@
 
 #include "BluetoothSerial.h"
 
-BluetoothSerial::BluetoothSerial() : SoftwareSerial(BT_RXD_PIN, BT_TXD_PIN)
+#define MAX_PIN 15  // @todo verify
+
+
+BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin, int statusPin) :
+										SoftwareSerial(receivePin, transmitPin)
 {
-	// class constructor here
+	// class constructor
+	if (isValidPin(statusPin))
+	{
+		m_statusValid = true;
+		m_statusPin = statusPin;
+		pinMode(m_statusPin, INPUT);
+	}
+	else
+	{
+		m_statusValid = false;
+	}
 }
 
 BluetoothSerial::~BluetoothSerial()
@@ -42,8 +56,18 @@ BluetoothSerial::~BluetoothSerial()
  * Get Bluetooth module status
  *
  * @return HIGH or LOW
+ *
+ * If statusPin is not valid, returns always HIGH
  */
 int BluetoothSerial::status()
 {
-    return digitalRead(BT_DSR_PIN);
+	if (!m_statusValid)
+	{
+		return HIGH;
+	}
+    return digitalRead(m_statusPin);
+}
+
+bool BluetoothSerial::isValidPin(int pin) {
+   return (pin >= 0 && pin <= 5) || (pin >= 12 && pin <= MAX_PIN);
 }
