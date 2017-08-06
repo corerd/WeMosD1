@@ -28,6 +28,7 @@
 
 #include "Arduino.h"
 #include "BluetoothSerial.h"
+#include "RIOserver.h"
 #include "LedCtrl.h"
 
 /// Bluetooth module interface pins
@@ -35,12 +36,17 @@
 #define BT_RXD_PIN  D6  // blue wire
 #define BT_DSR_PIN  D7  // green wire (STATUS pin)
 
-//BluetoothSerial instance
+// BluetoothSerial instance
 BluetoothSerial bt = BluetoothSerial(BT_RXD_PIN, BT_TXD_PIN, BT_DSR_PIN);
 int bt_connected = -1;
 
+// BluetoothSerial instance
+RIOserver remote = RIOserver(bt);
+
 //LedCtrl instance
 LedCtrl ledBuiltIn;
+int pin_id;
+int pin_value;
 
 void setup() {
 	ledBuiltIn.off();
@@ -68,10 +74,5 @@ void loop() {
 	}
 
 	//Process any info coming from the bluetooth serial link
-	if (bt.available()){
-		BluetoothData=bt.read(); //Get next character from bluetooth
-		Serial.print(BluetoothData);
-		if(BluetoothData=='O') ledBuiltIn.on();
-		if(BluetoothData=='o') ledBuiltIn.off();
-	}
+	remote.run();
 }

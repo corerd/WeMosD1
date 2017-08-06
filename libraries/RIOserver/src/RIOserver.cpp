@@ -36,14 +36,19 @@
 #define PIN_VIRTUAL	'V'
 
 /// Received control characters
-#define COMMAND_SEP		'#'
+#define COMMAND_SET		'='
 #define COMMAND_STOPPER	'*'
+
+/// Receive timer
+#define TIMER_RX_IDLE		0
+#define TIMER_RX_EXPIRED	3000  // ms
 
 enum Status_rx {WAIT_PIN_TYPE, WAIT_PIN_ADDRESS, WAIT_SEPARATOR, WAIT_VALUE, WAIT_STOPPER};
 
 
 RIOserver::RIOserver(BluetoothSerial &channel) :
 						m_channel(channel),
+						m_timer_rx_cnt(TIMER_RX_IDLE),
 						m_run_status(WAIT_PIN_TYPE)
 {
 	// class constructor
@@ -78,6 +83,7 @@ void RIOserver::run()
 					case PIN_ANALOG:
 					case PIN_DIGITAL:
 					case PIN_VIRTUAL:
+						m_timer_rx_cnt = millis();
 						m_run_status = WAIT_PIN_ADDRESS;
 						break;
 				}
@@ -87,12 +93,13 @@ void RIOserver::run()
 				m_run_status = WAIT_SEPARATOR;
 				break;
 			case WAIT_SEPARATOR:
-				if (m_channel.read() == COMMAND_SEP)
+				if (m_channel.read() == COMMAND_SET)
 				{
 					m_run_status = WAIT_VALUE;
 				}
 				else
 				{
+					m_timer_rx_cnt = TIMER_RX_IDLE;
 					m_run_status = WAIT_PIN_TYPE;
 				}
 				break;
@@ -105,17 +112,38 @@ void RIOserver::run()
 				{
 					exec_command();
 				}
+				m_timer_rx_cnt = TIMER_RX_IDLE;
 				m_run_status = WAIT_PIN_TYPE;
 				break;
+		}
+	}
+	if (m_timer_rx_cnt != TIMER_RX_IDLE)
+	{
+		if ( (millis()-m_timer_rx_cnt) > TIMER_RX_EXPIRED )
+		{
+			Serial.println("");
+			Serial.println("TIMEOUT");
+			Serial.println("");
+			m_timer_rx_cnt = TIMER_RX_IDLE;
+			m_run_status = WAIT_PIN_TYPE;
 		}
 	}
 }
 
 void RIOserver::exec_command()
 {
-	Serial.println("");
-	Serial.println(m_pin_type);
-	Serial.println(m_pin_address);
-	Serial.println(m_pin_value);
-	Serial.println("");
+	switch (m_pin_type) {
+		case PIN_DIGITAL:
+			pinMode(m_pin_address, OUTPUT);
+			digitalWrite(m_pin_address, m_pin_value);
+			break;
+		case PIN_ANALOG:
+		case PIN_VIRTUAL:
+			Serial.println("");
+			Serial.println(m_pin_type);
+			Serial.println(m_pin_address);
+			Serial.println(m_pin_value);
+			Serial.println("");
+			break;
+	}
 }

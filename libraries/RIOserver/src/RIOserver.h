@@ -49,6 +49,7 @@ class RIOserver
 
     // Member variables
 	BluetoothSerial &m_channel;
+    unsigned long m_timer_rx_cnt;
     char m_run_status;
     char m_pin_type;
     int m_pin_address;
