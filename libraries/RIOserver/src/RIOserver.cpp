@@ -138,6 +138,14 @@ void RIOserver::exec_command()
 			digitalWrite(m_pin_address, m_pin_value);
 			break;
 		case PIN_ANALOG:
+			pinMode(m_pin_address, OUTPUT);
+			if (m_pin_value > 255)
+			{
+				// margin high
+				m_pin_value = 255;
+			}
+			analogWrite(m_pin_address, m_pin_value);
+			break;
 		case PIN_VIRTUAL:
 			Serial.println("");
 			Serial.println(m_pin_type);
