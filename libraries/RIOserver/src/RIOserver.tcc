@@ -2,7 +2,21 @@
  * ESP8266 WeMos D1 mini library collection
  * Remote GPIO (the server part)
  *
- * Allow GPIO remote management.
+ * Implementations of templates declared in RIOserver.h
+ *
+ * A template is not a class or a function.
+ * A template is a pattern that the compiler uses to generate a family
+ * of classes or functions.
+ *
+ * In order for the compiler to generate the code, it must see both
+ * the template definition (not just declaration) and the specific types/whatever
+ * used to fill in the template.
+ *
+ * A common solution to this is to write the template declaration in a header file,
+ * then implement the class in an implementation file (for example .tcc),
+ * and include this implementation file at the end of the header.
+ *
+ * See: https://cpp.cb-geo.com/header/tcc_file.html
  *
  * =============================================================================
  * This code is placed under the MIT license
@@ -28,50 +42,21 @@
  * =============================================================================
  */
 
-#ifndef _RIOSERVER_
-#define _RIOSERVER_
+ #ifndef _RIOSERVER_
+ # error "Don't include this file directly, include RIOserver.h instead"
+ #endif
 
-#include "Arduino.h"
-#include "BluetoothSerial.h"
-
-/// PIN types
-#define PIN_ANALOG	'A'
-#define PIN_DIGITAL	'D'
-#define PIN_VIRTUAL	'V'
-
-/// Received control characters
-#define COMMAND_SET		'='
-#define COMMAND_STOPPER	'*'
-
-class RIOserver
+/**
+ * Send data to the client over a virtual pin
+ *
+ * @param virtual_pin   virtual pin ID
+ * @param v_pin_value   value to send - any data type
+ */
+template <typename T> void RIOserver::virtualWrite(int virtual_pin, T v_pin_value)
 {
-  public:
-    RIOserver(BluetoothSerial &channel);
-    ~RIOserver();
-
-    /// Process incoming commands and perform connection housekeeping
-    void run();
-
-    /**
-     * Change client Widget properties
-     */
-    /// Send data to the client over a virtual pin
-    template <typename T> void virtualWrite(int virtual_pin, T v_pin_value);
-    /// Set Lights Widget colour
-    void wLightsPropertySet(int red, int green, int blue);
-
-  private:
-    void exec_command();
-
-    // Member variables
-    BluetoothSerial &m_channel;
-    unsigned long m_timer_rx_cnt;
-    char m_run_status;
-    char m_pin_type;
-    int m_pin_address;
-    int m_pin_value;
-};
-
-#include "RIOserver.tcc"
-
-#endif /* _RIOSERVER_ */
+	m_channel.print(PIN_VIRTUAL);
+	m_channel.print(virtual_pin);
+  m_channel.print(COMMAND_SET);
+	m_channel.print(v_pin_value);
+	m_channel.print(COMMAND_STOPPER);
+}
