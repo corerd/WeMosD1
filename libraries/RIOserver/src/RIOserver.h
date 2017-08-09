@@ -34,6 +34,14 @@
 #include "Arduino.h"
 #include "BluetoothSerial.h"
 
+/// PIN types
+#define PIN_ANALOG	'A'
+#define PIN_DIGITAL	'D'
+#define PIN_VIRTUAL	'V'
+
+/// Received control characters
+#define COMMAND_SET		'='
+#define COMMAND_STOPPER	'*'
 
 class RIOserver
 {
@@ -44,11 +52,17 @@ class RIOserver
     /// Process incoming commands and perform connection housekeeping
     void run();
 
+    /**
+     * Change client Widget properties
+     */
+    /// Set Lights Widget colour
+    void wLightsPropertySet(int red, int green, int blue);
+
   private:
     void exec_command();
 
     // Member variables
-	BluetoothSerial &m_channel;
+    BluetoothSerial &m_channel;
     unsigned long m_timer_rx_cnt;
     char m_run_status;
     char m_pin_type;

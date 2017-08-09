@@ -29,7 +29,6 @@
 #include "Arduino.h"
 #include "BluetoothSerial.h"
 #include "RIOserver.h"
-#include "LedCtrl.h"
 
 /// Bluetooth module interface pins
 #define BT_TXD_PIN  D5  // yellow wire
@@ -43,14 +42,11 @@ int bt_connected = -1;
 // BluetoothSerial instance
 RIOserver remote = RIOserver(bt);
 
-//LedCtrl instance
-LedCtrl ledBuiltIn;
-int pin_id;
-int pin_value;
+int wLights_toggle = 0;
+unsigned long wLights_toggle_timer = 0;
+
 
 void setup() {
-	ledBuiltIn.off();
-
 	//initialize embedded Serial line for debug
 	Serial.begin(9600);
 
@@ -70,6 +66,24 @@ void loop() {
 			Serial.println("CONNECTED");
 		} else {
 			Serial.println("DISCONNECTED");
+		}
+	}
+
+	if (bt_connected)
+	{
+		if ( (millis()-wLights_toggle_timer) > 3000 )
+		{
+			 if (wLights_toggle)
+			 {
+				 wLights_toggle = 0;
+				 remote.wLightsPropertySet(0, 0, 0);
+			 }
+			 else
+			 {
+				 wLights_toggle = 1;
+				 remote.wLightsPropertySet(255, 255, 255);
+			 }
+			wLights_toggle_timer = millis();
 		}
 	}
 

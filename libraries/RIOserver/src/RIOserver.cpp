@@ -30,20 +30,30 @@
 
 #include "RIOserver.h"
 
-/// PIN types
-#define PIN_ANALOG	'A'
-#define PIN_DIGITAL	'D'
-#define PIN_VIRTUAL	'V'
-
-/// Received control characters
-#define COMMAND_SET		'='
-#define COMMAND_STOPPER	'*'
-
-/// Receive timer
-#define TIMER_RX_IDLE		0
+/**
+ * Commands receiver
+ */
+/// Receiver timer
+#define TIMER_RX_IDLE			0
 #define TIMER_RX_EXPIRED	3000  // ms
-
+/// Receiver status
 enum Status_rx {WAIT_PIN_TYPE, WAIT_PIN_ADDRESS, WAIT_SEPARATOR, WAIT_VALUE, WAIT_STOPPER};
+
+/**
+ * Indicator Widgets
+ *
+ * Command format:
+ * <command> ::= <widget_start><widget_element><widget_property_value><widget_stopper>
+ * <widget_start> ::= '*'
+ * <widget_element> ::= 'L'
+ * <widget_property_value> ::= <string>
+ * <widget_stopper> ::= '*'
+ * <string> ::= <char> | <string><char>
+ * <char> ::= <letter> | <digit>
+ */
+#define WIDGET_START		'*'
+#define WIDGET_STOPPER	'*'
+#define WIDGET_LIGHTS		'L'
 
 
 RIOserver::RIOserver(BluetoothSerial &channel) :
@@ -129,6 +139,50 @@ void RIOserver::run()
 		}
 	}
 }
+
+/**
+ * Set Lights Widget colour
+ *
+ * @param red		RGB component
+ * @param green	RGB component
+ * @param blue	RGB component
+ *
+ * The Lights colour is changed by sending the values of its RGB components.
+ * If one of the colour value is negative, then that component is not changed.
+ *
+ * If more than one element has the same type, then the data is sent to both.
+ */
+void RIOserver::wLightsPropertySet(int red, int green, int blue)
+{
+	static int p_red = 0;
+	static int p_green = 0;
+	static int p_blue = 0;
+
+	if (red >= 0)
+	{
+		p_red = red;
+	}
+	if (green >= 0)
+	{
+		p_green = green;
+	}
+	if (blue >= 0)
+	{
+		p_blue = blue;
+	}
+	m_channel.printf("%c%cR%dG%dB%d%c",
+										WIDGET_START,
+										WIDGET_LIGHTS,
+										p_red,
+										p_green,
+										p_blue,
+										WIDGET_STOPPER);
+}
+
+
+/**
+ * Private functions
+ */
 
 void RIOserver::exec_command()
 {
