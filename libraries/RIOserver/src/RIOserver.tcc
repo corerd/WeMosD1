@@ -52,7 +52,7 @@
  * @param virtual_pin   virtual pin ID
  * @param v_pin_value   value to send - any data type
  */
-template <typename T> void RIOserver::virtualWrite(int virtual_pin, T v_pin_value)
+template <typename T> void RIOserver::virtualPush(int virtual_pin, T v_pin_value)
 {
 	m_channel.print(PIN_VIRTUAL);
 	m_channel.print(virtual_pin);

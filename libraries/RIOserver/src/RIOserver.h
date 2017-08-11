@@ -56,9 +56,9 @@ class RIOserver
      * Change client Widget properties
      */
     /// Send data to the client over a virtual pin
-    template <typename T> void virtualWrite(int virtual_pin, T v_pin_value);
+    template <typename T> void virtualPush(int virtual_pin, T v_pin_value);
     /// Set Lights Widget colour
-    void wLightsPropertySet(int red, int green, int blue);
+    void widgetLights_setColour(int red, int green, int blue);
 
   private:
     void exec_command();

@@ -39,7 +39,7 @@
 BluetoothSerial bt = BluetoothSerial(BT_RXD_PIN, BT_TXD_PIN, BT_DSR_PIN);
 int bt_connected = -1;
 
-// BluetoothSerial instance
+// RIOserver instance
 RIOserver remote = RIOserver(bt);
 
 int wLights_toggle = 0;
