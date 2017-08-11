@@ -30,6 +30,9 @@
 #include "BluetoothSerial.h"
 #include "RIOserver.h"
 
+/// Demo pin
+#define DIMMER_PIN  15
+
 /// Bluetooth module interface pins
 #define BT_TXD_PIN  D5  // yellow wire
 #define BT_RXD_PIN  D6  // blue wire
@@ -46,12 +49,29 @@ int wLights_toggle = 0;
 unsigned long wLights_toggle_timer = 0;
 
 
+/// RIOserver callback
+void virtualWrite(int pin, int value)
+{
+  switch(pin)
+  {
+    case 0:
+      // set Red component value
+      remote.widgetLights_setColour(value, -1, -1);
+      // feedback
+      analogWrite(DIMMER_PIN, value);
+      break;
+  }
+}
+
 void setup() {
-	//initialize embedded Serial line for debug
+  // Set Analog pin
+  pinMode(DIMMER_PIN, OUTPUT);
+
+	// Initialize embedded Serial line for debug
 	Serial.begin(9600);
 
-	//initialize Bluetooth line
-	bt.begin(9600);
+  // Initialize RIO server
+  remote.begin(9600, virtualWrite);
 }
 
 void loop() {
@@ -66,24 +86,6 @@ void loop() {
 			Serial.println("CONNECTED");
 		} else {
 			Serial.println("DISCONNECTED");
-		}
-	}
-
-	if (bt_connected)
-	{
-		if ( (millis()-wLights_toggle_timer) > 3000 )
-		{
-			 if (wLights_toggle)
-			 {
-				 wLights_toggle = 0;
-				 remote.wLightsPropertySet(0, 0, 0);
-			 }
-			 else
-			 {
-				 wLights_toggle = 1;
-				 remote.wLightsPropertySet(255, 255, 255);
-			 }
-			wLights_toggle_timer = millis();
 		}
 	}
 

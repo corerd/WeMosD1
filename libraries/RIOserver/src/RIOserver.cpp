@@ -59,7 +59,8 @@ enum Status_rx {WAIT_PIN_TYPE, WAIT_PIN_ADDRESS, WAIT_SEPARATOR, WAIT_VALUE, WAI
 RIOserver::RIOserver(BluetoothSerial &channel) :
 						m_channel(channel),
 						m_timer_rx_cnt(TIMER_RX_IDLE),
-						m_run_status(WAIT_PIN_TYPE)
+						m_run_status(WAIT_PIN_TYPE),
+						m_virtualWriteHnd(NULL)
 {
 	// class constructor
 }
@@ -67,6 +68,18 @@ RIOserver::RIOserver(BluetoothSerial &channel) :
 RIOserver::~RIOserver()
 {
 	// class destructor here
+}
+
+/**
+ * Initialize
+ *
+ * @param speed data rate in baud for serial data transmission
+ * @param virtualWriteHnd callback function to write Virtual pins
+ */
+void RIOserver::begin(long speed, VirtualWriteHandler virtualWriteHnd)
+{
+	m_channel.begin(speed);
+	m_virtualWriteHnd = virtualWriteHnd;
 }
 
 /**
@@ -201,11 +214,10 @@ void RIOserver::exec_command()
 			analogWrite(m_pin_address, m_pin_value);
 			break;
 		case PIN_VIRTUAL:
-			Serial.println("");
-			Serial.println(m_pin_type);
-			Serial.println(m_pin_address);
-			Serial.println(m_pin_value);
-			Serial.println("");
+			if (m_virtualWriteHnd != NULL)
+			{
+				m_virtualWriteHnd(m_pin_address, m_pin_value);
+			}
 			break;
 	}
 }

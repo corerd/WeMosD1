@@ -43,12 +43,17 @@
 #define COMMAND_SET		'='
 #define COMMAND_STOPPER	'*'
 
+/// Pointer to Send value to a Virtual Pin function
+typedef void (*VirtualWriteHandler)(int pin, int value);
+
 class RIOserver
 {
   public:
     RIOserver(BluetoothSerial &channel);
     ~RIOserver();
 
+    /// Initialize
+    void begin(long speed, VirtualWriteHandler virtualWriteHnd);
     /// Process incoming commands and perform connection housekeeping
     void run();
 
@@ -60,10 +65,13 @@ class RIOserver
     /// Set Lights Widget colour
     void widgetLights_setColour(int red, int green, int blue);
 
+    /// Member variables
+    VirtualWriteHandler m_virtualWriteHnd;
+
   private:
     void exec_command();
 
-    // Member variables
+    /// Member variables
     BluetoothSerial &m_channel;
     unsigned long m_timer_rx_cnt;
     char m_run_status;
