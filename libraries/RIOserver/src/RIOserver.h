@@ -64,12 +64,9 @@ class RIOserver
     template <typename T> void virtualPush(int virtual_pin, T v_pin_value);
     /// Set Lights Widget colour
     void widgetLights_setColour(int red, int green, int blue);
-<<<<<<< HEAD
 
     /// Member variables
     VirtualWriteHandler m_virtualWriteHnd;
-=======
->>>>>>> c0e3cf8cc4b45afd57f103b36fa295d13f0f1d5e
 
   private:
     void exec_command();
