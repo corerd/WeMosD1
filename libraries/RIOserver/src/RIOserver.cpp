@@ -152,7 +152,7 @@ void RIOserver::run()
  *
  * If more than one element has the same type, then the data is sent to both.
  */
-void RIOserver::wLightsPropertySet(int red, int green, int blue)
+void RIOserver::widgetLights_setColour(int red, int green, int blue)
 {
 	static int p_red = 0;
 	static int p_green = 0;
