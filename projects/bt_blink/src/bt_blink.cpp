@@ -34,9 +34,9 @@
 #define DIMMER_PIN  15
 
 /// Bluetooth module interface pins
-#define BT_TXD_PIN  D5  // yellow wire
-#define BT_RXD_PIN  D6  // blue wire
-#define BT_DSR_PIN  D7  // green wire (STATUS pin)
+#define BT_RXD_PIN  D5  // green wire
+#define BT_TXD_PIN  D6  // yellow wire
+#define BT_DSR_PIN  D7  // blue wire (STATUS pin)
 
 // BluetoothSerial instance
 BluetoothSerial bt = BluetoothSerial(BT_RXD_PIN, BT_TXD_PIN, BT_DSR_PIN);
