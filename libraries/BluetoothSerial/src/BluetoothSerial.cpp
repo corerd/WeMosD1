@@ -28,7 +28,7 @@
 
 #include "BluetoothSerial.h"
 
-#define MAX_PIN 15  // @todo verify
+#define MAX_PIN 16
 
 
 BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin, int statusPin) :
