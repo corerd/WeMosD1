@@ -36,11 +36,13 @@
 class BluetoothSerial : public SoftwareSerial
 {
   public:
-    BluetoothSerial(int receivePin, int transmitPin, int statusPin=-1);
+    BluetoothSerial(int receivePin, int transmitPin, int statusPin=-1, int enPin=-1);
     ~BluetoothSerial();
 
     /// Get Bluetooth module status
     int status();
+    /// Reset Bluetooth module
+    void reset();
 
   protected:
     bool isValidPin(int pin);
@@ -48,7 +50,7 @@ class BluetoothSerial : public SoftwareSerial
   private:
     // Member variables
     int m_statusPin;
-    bool m_statusValid;
+    int m_enPin;
  };
 
 #endif /* _BLUETOOTHSERIAL_ */

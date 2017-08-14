@@ -31,19 +31,21 @@
 #define MAX_PIN 16
 
 
-BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin, int statusPin) :
+BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin, int statusPin, int enPin) :
 										SoftwareSerial(receivePin, transmitPin)
 {
 	// class constructor
-	if (isValidPin(statusPin))
+	m_statusPin = statusPin;
+	if (isValidPin(m_statusPin))
 	{
-		m_statusValid = true;
-		m_statusPin = statusPin;
 		pinMode(m_statusPin, INPUT);
 	}
-	else
+
+	m_enPin = enPin;
+	if (isValidPin(m_enPin))
 	{
-		m_statusValid = false;
+		pinMode(m_enPin, OUTPUT);
+		digitalWrite(m_enPin, HIGH);
 	}
 }
 
@@ -61,11 +63,27 @@ BluetoothSerial::~BluetoothSerial()
  */
 int BluetoothSerial::status()
 {
-	if (!m_statusValid)
+	if (!isValidPin(m_statusPin))
 	{
 		return HIGH;
 	}
-    return digitalRead(m_statusPin);
+  return digitalRead(m_statusPin);
+}
+
+/**
+ * Reset Bluetooth module
+ *
+ * Use EN pin to disable/enable the module.
+ * If the module was previously connected, this function will disconnect it.
+ */
+void BluetoothSerial::reset()
+{
+	if (isValidPin(m_enPin))
+	{
+		digitalWrite(m_enPin, LOW);
+		delay(100);  // ms
+		digitalWrite(m_enPin, HIGH);
+	}
 }
 
 bool BluetoothSerial::isValidPin(int pin) {
