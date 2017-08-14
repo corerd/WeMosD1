@@ -28,30 +28,43 @@
 
 #include "BluetoothSerial.h"
 
-#define MAX_PIN 16
+#define MAX_PIN_NUMBER 		16
+#define PIN_UNCONNECTED		-1
 
 
-BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin, int statusPin, int enPin) :
-										SoftwareSerial(receivePin, transmitPin)
+/**
+ * Default BluetoothSerial Class constructor
+ *
+ * @param receivePin the pin on which to receive serial data
+ * @param transmitPin the pin on which to transmit serial data
+ *
+ * By default no pin is connected other than receive / transmit serial data
+ * from / to the Bluetooth module.
+ */
+BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin) :
+									SoftwareSerial(receivePin, transmitPin)
 {
-	// class constructor
-	m_statusPin = statusPin;
-	if (isValidPin(m_statusPin))
-	{
-		pinMode(m_statusPin, INPUT);
-	}
-
-	m_enPin = enPin;
-	if (isValidPin(m_enPin))
-	{
-		pinMode(m_enPin, OUTPUT);
-		digitalWrite(m_enPin, HIGH);
-	}
+	// Initialize pin numbers through which to control the Bluetooth module
+	// with default values (no control pins is connected)
+	m_btCtrlPins = BluetoothControlPIns();
 }
 
-BluetoothSerial::~BluetoothSerial()
+/**
+ * BluetoothSerial Class constructor assigning pin numbers through which
+ * to control the Bluetooth module.
+ *
+ * @param receivePin the pin on which to receive serial data
+ * @param transmitPin the pin on which to transmit serial data
+ * @param btCtrlPins the object referenced to copy to member variable
+ *
+ * The optional control pins numbers are set by calling BluetoothControlPIns
+ * class methods in a named (key-value pair) parameter passing style.
+ */
+BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin,
+																	BluetoothControlPIns const& btCtrlPins) :
+																			SoftwareSerial(receivePin, transmitPin),
+																			m_btCtrlPins(btCtrlPins)
 {
-	// class destructor here
 }
 
 /**
@@ -59,15 +72,15 @@ BluetoothSerial::~BluetoothSerial()
  *
  * @return HIGH or LOW
  *
- * If statusPin is not valid, returns always HIGH
+ * If statePin is not valid, returns always HIGH
  */
 int BluetoothSerial::status()
 {
-	if (!isValidPin(m_statusPin))
+	if (m_btCtrlPins.m_statePin == PIN_UNCONNECTED)
 	{
 		return HIGH;
 	}
-  return digitalRead(m_statusPin);
+	return digitalRead(m_btCtrlPins.m_statePin);
 }
 
 /**
@@ -78,14 +91,68 @@ int BluetoothSerial::status()
  */
 void BluetoothSerial::reset()
 {
-	if (isValidPin(m_enPin))
+	if (m_btCtrlPins.m_enPin == PIN_UNCONNECTED)
 	{
-		digitalWrite(m_enPin, LOW);
-		delay(100);  // ms
-		digitalWrite(m_enPin, HIGH);
+		return;
 	}
+	digitalWrite(m_btCtrlPins.m_enPin, LOW);
+	delay(100);  // ms
+	digitalWrite(m_btCtrlPins.m_enPin, HIGH);
 }
 
-bool BluetoothSerial::isValidPin(int pin) {
-   return (pin >= 0 && pin <= 5) || (pin >= 12 && pin <= MAX_PIN);
+
+ /**
+	* Default BluetoothControlPIns Class constructor
+	*
+	* By default no pin is connected.
+	*/
+BluetoothControlPIns::BluetoothControlPIns() :
+												m_statePin(PIN_UNCONNECTED),
+												m_enPin(PIN_UNCONNECTED)
+{
+	// class constructor
+}
+
+/**
+ * Set pin number connected to Bluetooth module STATE pin
+ *
+ * @param _statePin pin number
+ * @return *this object by reference so that other set methods can be chained together
+ */
+BluetoothControlPIns& BluetoothControlPIns::statePin(int _statePin)
+{
+	if (isValidPin(_statePin))
+	{
+		m_statePin = _statePin;
+		pinMode(m_statePin, INPUT);
+	}
+	return *this;
+}
+
+/**
+ * Set pin number connected to Bluetooth module EN pin
+ *
+ * @param _enPin pin number
+ * @return *this object by reference so that other set methods can be chained together
+ */
+BluetoothControlPIns& BluetoothControlPIns::enPin(int _enPin)
+{
+	if (isValidPin(_enPin))
+	{
+		m_enPin = _enPin;
+		pinMode(m_enPin, OUTPUT);
+		digitalWrite(m_enPin, HIGH);
+	}
+	return *this;
+}
+
+/**
+ * Check the valid range of the pin number parameter
+ *
+ * @param pin number
+ * @return false if pin number out of range, true otherwise
+ */
+bool BluetoothControlPIns::isValidPin(int pin)
+{
+   return (pin >= 0 && pin <= 5) || (pin >= 12 && pin <= MAX_PIN_NUMBER);
 }
