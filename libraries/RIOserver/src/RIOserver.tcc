@@ -54,9 +54,9 @@
  */
 template <typename T> void RIOserver::virtualPush(int virtual_pin, T v_pin_value)
 {
-	m_channel.print(PIN_VIRTUAL);
-	m_channel.print(virtual_pin);
+  m_channel.print(PIN_VIRTUAL);
+  m_channel.print(virtual_pin);
   m_channel.print(COMMAND_SET);
-	m_channel.print(v_pin_value);
-	m_channel.print(COMMAND_STOPPER);
+  m_channel.print(v_pin_value);
+  m_channel.print(COMMAND_STOPPER);
 }

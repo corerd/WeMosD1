@@ -40,8 +40,8 @@
 
 // BluetoothSerial instance
 BluetoothSerial bt = BluetoothSerial(BT_RXD_PIN, BT_TXD_PIN,
-														BluetoothControlPIns()
-															.statePin(BT_DSR_PIN) );
+                            BluetoothControlPIns()
+                              .statePin(BT_DSR_PIN) );
 
 /// RIOserver instance
 RIOserver remote = RIOserver(bt);
@@ -63,27 +63,27 @@ void virtualWrite(int pin, int value)
 /// Show Bluetooth Status
 void chkBluetoothStatus()
 {
-	static int bt_connected = -1;
-	int bt_status;
+  static int bt_connected = -1;
+  int bt_status;
 
-	bt_status = bt.status();
-	if (bt_connected != bt_status) {
-		bt_connected = bt_status;
-		Serial.println("");
-		if (bt_connected) {
-			Serial.println(">CONNECTED<");
-		} else {
-			Serial.println(">DISCONNECTED<");
-		}
-	}
+  bt_status = bt.status();
+  if (bt_connected != bt_status) {
+    bt_connected = bt_status;
+    Serial.println("");
+    if (bt_connected) {
+      Serial.println(">CONNECTED<");
+    } else {
+      Serial.println(">DISCONNECTED<");
+    }
+  }
 }
 
 void setup() {
   // Set Analog pin
   pinMode(DIMMER_PIN, OUTPUT);
 
-	// Initialize embedded Serial line for debug
-	Serial.begin(9600);
+  // Initialize embedded Serial line for debug
+  Serial.begin(9600);
 
   // Initialize RIO server
   remote.begin(9600, virtualWrite);
@@ -92,6 +92,6 @@ void setup() {
 void loop() {
   chkBluetoothStatus();
 
-	//Process any info coming from the bluetooth serial link
-	remote.run();
+  //Process any info coming from the bluetooth serial link
+  remote.run();
 }

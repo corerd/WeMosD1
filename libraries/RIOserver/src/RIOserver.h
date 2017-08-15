@@ -35,13 +35,13 @@
 #include "BluetoothSerial.h"
 
 /// PIN types
-#define PIN_ANALOG	'A'
-#define PIN_DIGITAL	'D'
-#define PIN_VIRTUAL	'V'
+#define PIN_ANALOG   'A'
+#define PIN_DIGITAL  'D'
+#define PIN_VIRTUAL  'V'
 
 /// Received control characters
-#define COMMAND_SET		'='
-#define COMMAND_STOPPER	'*'
+#define COMMAND_SET      '='
+#define COMMAND_STOPPER  '*'
 
 /// Pointer to Send value to a Virtual Pin function
 typedef void (*VirtualWriteHandler)(int pin, int value);

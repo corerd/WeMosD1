@@ -28,8 +28,8 @@
 
 #include "BluetoothSerial.h"
 
-#define MAX_PIN_NUMBER 		16
-#define PIN_UNCONNECTED		-1
+#define MAX_PIN_NUMBER     16
+#define PIN_UNCONNECTED    -1
 
 
 /**
@@ -42,11 +42,11 @@
  * from / to the Bluetooth module.
  */
 BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin) :
-									SoftwareSerial(receivePin, transmitPin)
+                  SoftwareSerial(receivePin, transmitPin)
 {
-	// Initialize pin numbers through which to control the Bluetooth module
-	// with default values (no control pins is connected)
-	m_btCtrlPins = BluetoothControlPIns();
+  // Initialize pin numbers through which to control the Bluetooth module
+  // with default values (no control pins is connected)
+  m_btCtrlPins = BluetoothControlPIns();
 }
 
 /**
@@ -61,9 +61,9 @@ BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin) :
  * class methods in a named (key-value pair) parameter passing style.
  */
 BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin,
-																	BluetoothControlPIns const& btCtrlPins) :
-																			SoftwareSerial(receivePin, transmitPin),
-																			m_btCtrlPins(btCtrlPins)
+                                  BluetoothControlPIns const& btCtrlPins) :
+                                      SoftwareSerial(receivePin, transmitPin),
+                                      m_btCtrlPins(btCtrlPins)
 {
 }
 
@@ -76,11 +76,11 @@ BluetoothSerial::BluetoothSerial(int receivePin, int transmitPin,
  */
 int BluetoothSerial::status()
 {
-	if (m_btCtrlPins.m_statePin == PIN_UNCONNECTED)
-	{
-		return HIGH;
-	}
-	return digitalRead(m_btCtrlPins.m_statePin);
+  if (m_btCtrlPins.m_statePin == PIN_UNCONNECTED)
+  {
+    return HIGH;
+  }
+  return digitalRead(m_btCtrlPins.m_statePin);
 }
 
 /**
@@ -91,26 +91,26 @@ int BluetoothSerial::status()
  */
 void BluetoothSerial::reset()
 {
-	if (m_btCtrlPins.m_enPin == PIN_UNCONNECTED)
-	{
-		return;
-	}
-	digitalWrite(m_btCtrlPins.m_enPin, LOW);
-	delay(100);  // ms
-	digitalWrite(m_btCtrlPins.m_enPin, HIGH);
+  if (m_btCtrlPins.m_enPin == PIN_UNCONNECTED)
+  {
+    return;
+  }
+  digitalWrite(m_btCtrlPins.m_enPin, LOW);
+  delay(100);  // ms
+  digitalWrite(m_btCtrlPins.m_enPin, HIGH);
 }
 
 
  /**
-	* Default BluetoothControlPIns Class constructor
-	*
-	* By default no pin is connected.
-	*/
+  * Default BluetoothControlPIns Class constructor
+  *
+  * By default no pin is connected.
+  */
 BluetoothControlPIns::BluetoothControlPIns() :
-												m_statePin(PIN_UNCONNECTED),
-												m_enPin(PIN_UNCONNECTED)
+                        m_statePin(PIN_UNCONNECTED),
+                        m_enPin(PIN_UNCONNECTED)
 {
-	// class constructor
+  // class constructor
 }
 
 /**
@@ -121,12 +121,12 @@ BluetoothControlPIns::BluetoothControlPIns() :
  */
 BluetoothControlPIns& BluetoothControlPIns::statePin(int _statePin)
 {
-	if (isValidPin(_statePin))
-	{
-		m_statePin = _statePin;
-		pinMode(m_statePin, INPUT);
-	}
-	return *this;
+  if (isValidPin(_statePin))
+  {
+    m_statePin = _statePin;
+    pinMode(m_statePin, INPUT);
+  }
+  return *this;
 }
 
 /**
@@ -137,13 +137,13 @@ BluetoothControlPIns& BluetoothControlPIns::statePin(int _statePin)
  */
 BluetoothControlPIns& BluetoothControlPIns::enPin(int _enPin)
 {
-	if (isValidPin(_enPin))
-	{
-		m_enPin = _enPin;
-		pinMode(m_enPin, OUTPUT);
-		digitalWrite(m_enPin, HIGH);
-	}
-	return *this;
+  if (isValidPin(_enPin))
+  {
+    m_enPin = _enPin;
+    pinMode(m_enPin, OUTPUT);
+    digitalWrite(m_enPin, HIGH);
+  }
+  return *this;
 }
 
 /**
