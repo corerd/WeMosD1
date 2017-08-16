@@ -50,8 +50,8 @@ Connecting the HC-05 to the WeMos D1 Mini
 -----------------------------------------
 ![user input clear](https://corerd.github.io/WeMosD1/img/hc05-D1mini_bb.jpg)
 
-HC-05             ||       WeMos D1 Mini
-------------------||-----------------------------------------------------
+HC-05   |          |             D1 Mini
+------- | -------- | -------- | -------- | ------------------------------
 **Pin** | **Mode** | **GPIO** | **Mode** | **Function**
   EN    |  Input   |    D0    |  Output  | Set Module Enable / Disable
   VCC   |    -     |    5V    |    -     | Power supply
