@@ -48,7 +48,6 @@ for more informations.
 
 Connecting the HC-05 to the WeMos D1 Mini
 -----------------------------------------
-
 ![user input clear](https://corerd.github.io/WeMosD1/img/hc05-D1mini_bb.jpg)
 
 <table>
@@ -56,9 +55,9 @@ Connecting the HC-05 to the WeMos D1 Mini
     <th colspan="2">HC-05</th>
     <th colspan="3">WeMos D1 Mini</th>
   </tr>
-  <tr>
-    <td><b>PIN</b></td> <td>**Mode**</td> <td>**GPIO**</td> <td>**Mode**</td>  <td>**Function**</td>
-  </tr>
+  <tr><b>
+    <td>PIN</td> <td>**Mode**</td> <td>**GPIO**</td> <td>**Mode**</td>  <td>**Function**</td>
+  </b></tr>
   <tr>
     <td>EN</td> <td>Input</td> <td>D0</td> <td>Output</td> <td>Set Module Enable / Disable</td>
   </tr>
