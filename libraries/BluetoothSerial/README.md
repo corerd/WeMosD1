@@ -56,38 +56,27 @@ Connecting the HC-05 to the WeMos D1 Mini
     <th colspan="3">WeMos D1 Mini</th>
   </tr>
   <tr>
-    <td>PIN</td>
-    <td>Mode</td>
-    <td>GPIO</td>
-    <td>Mode</td>
-    <td>Function</td>
+    <td>**PIN**</td> <td>**Mode**</td> <td>**GPIO**</td> <td>**Mode**</td>  <td>**Function**</td>
   </tr>
   <tr>
-    <td>EN</td>
-    <td>Input</td>
-    <td>D0</td>
-    <td>Output</td>
-    <td>Set Module Enable / Disable</td>
+    <td>EN</td> <td>Input</td> <td>D0</td> <td>Output</td> <td>Set Module Enable / Disable</td>
   </tr>
   <tr>
-    <td>VCC</td>
-    <td>-</td>
-    <td>5V</td>
-    <td>-</td>
-    <td>Power supply</td>
+    <td>VCC</td> <td>-</td> <td>5V</td> <td>-</td> <td>Power supply</td>
+  </tr>
+  <tr>
+    <td>GND</td> <td>-</td> <td>G</td> <td>-</td> <td>Ground</td>
+  </tr>
+  <tr>
+    <td>TXD</td> <td>Output</td> <td>D5</td> <td>Input</td> <td>RX Serial Data</td>
+  </tr>
+  <tr>
+    <td>RXD</td> <td>Input</td> <td>D6</td> <td>Output</td> <td>TX Serial Data</td>
+  </tr>
+  <tr>
+    <td>STATE</td> <td>Output</td> <td>D7</td> <td>Input</td> <td>Get Bluetooth connection state</td>
   </tr>
 </table>
-
-
-HC-05   |          | D1 Mini  |          |                                |
-------- | -------- | -------- | -------- | ------------------------------
-**Pin** | **Mode** | **GPIO** | **Mode** | **Function**
-  EN    |  Input   |    D0    |  Output  | Set Module Enable / Disable
-  VCC   |    -     |    5V    |    -     | Power supply
-  GND   |    -     |    G     |    -     | Ground
-  TXD   |  Output  |    D5    |  Input   | RX Serial Data
-  RXD   |  Input   |    D6    |  Output  | TX Serial Data
- STATE  |  Output  |    D7    |  Input   | Get Bluetooth connection state
 
 Software serial is used on WeMos D1 Mini GPIOs D5 and D6 to talk to the HC-05.
 This means that the hardware serial can still be used to talk to
