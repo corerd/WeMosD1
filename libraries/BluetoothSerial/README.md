@@ -55,9 +55,9 @@ Connecting the HC-05 to the WeMos D1 Mini
     <th colspan="2">HC-05</th>
     <th colspan="3">WeMos D1 Mini</th>
   </tr>
-  <tr><b>
-    <td>PIN</td> <td>**Mode**</td> <td>**GPIO**</td> <td>**Mode**</td>  <td>**Function**</td>
-  </b></tr>
+  <tr>
+    <td><b>PIN</b></td> <td><b>Mode</b></td> <td><b>GPIO</b></td> <td><b>Mode</b></td>  <td><b>Function</b></td>
+  </tr>
   <tr>
     <td>EN</td> <td>Input</td> <td>D0</td> <td>Output</td> <td>Set Module Enable / Disable</td>
   </tr>
