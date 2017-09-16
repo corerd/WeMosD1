@@ -49,6 +49,9 @@
 #define    ACC_FULL_SCALE_16_G       0x18
 
 
+// Defines the GPIO pin where is connected a custom led
+#define LED_CUSTOM  D0
+
 // built in led
 LedCtrl ledBlue;
 LedCtrl ledRed(LED_CUSTOM);

@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include "LedCtrl.h"
 
+// Defines the GPIO pin where is connected a custom led
+#define LED_CUSTOM  D0
+
 LedCtrl ledBlue; // built in led
 LedCtrl ledRed(LED_CUSTOM); // Define a custom led
 char val; // Data received from the serial port

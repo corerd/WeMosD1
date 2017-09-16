@@ -41,9 +41,6 @@
 
 #include "Arduino.h"
 
-// Defines the GPIO pin where is connected a custom led
-#define LED_CUSTOM  D0
-
 /**
  * Class LedCtrl
  *

@@ -10,6 +10,9 @@
 #include "LedCtrl.h"
 #include "Flash.h"
 
+// Defines the GPIO pin where is connected a custom led
+#define LED_CUSTOM  D0
+
 LedCtrl ledRed(LED_CUSTOM);
 
 void setup(void) {

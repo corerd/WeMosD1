@@ -17,6 +17,9 @@
 #include "Ticker.h"
 #include "LedCtrl.h"
 
+// Defines the GPIO pin where is connected a custom led
+#define LED_CUSTOM  D0
+
 Ticker flipper;
 
 LedCtrl ledBuiltIn;
