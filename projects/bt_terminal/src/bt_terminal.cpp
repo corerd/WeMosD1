@@ -30,16 +30,23 @@
 #include "BluetoothSerial.h"
 
 /// Bluetooth module interface pins
-#define BT_EN_PIN    D0  // orange wire
+#ifdef WEMOS_D1
+#define BT_EN_PIN   D0  // orange wire
 #define BT_RXD_PIN  D5  // green wire
 #define BT_TXD_PIN  D6  // yellow wire
 #define BT_DSR_PIN  D7  // blue wire (STATUS pin)
+#else
+#define BT_EN_PIN   2   // orange wire (voltage divider)
+#define BT_RXD_PIN  3   // green wire
+#define BT_TXD_PIN  4   // yellow wire (voltage divider)
+#define BT_DSR_PIN  5   // blue wire (STATUS pin)
+#endif
 
 // BluetoothSerial instance
 BluetoothSerial bt = BluetoothSerial(BT_RXD_PIN, BT_TXD_PIN,
                             BluetoothControlPIns()
-                              .statePin(BT_DSR_PIN)
-                              .enPin(BT_EN_PIN) );
+                              .statePin(BT_DSR_PIN) );
+                              //.enPin(BT_EN_PIN) );
 
 void chkBluetoothStatus()
 {

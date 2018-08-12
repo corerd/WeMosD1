@@ -10,3 +10,7 @@ local/
 # C extensions
 *.so
 *.gch
+.pioenvs
+.piolibdeps
+.clang_complete
+.gcc-flags.json
