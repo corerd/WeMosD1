@@ -89,3 +89,39 @@ HC-05 `EN Pin` is connected to the WeMos D1 Mini GPIO D0 to programmatically
 enable / disable the module.
 If a connection is in progress, the LOW-HIGH transition on `EN Pin` forces
 the disconnection. The same applies also to exit from **AT Command mode**.
+
+
+Connecting the HC-05 to the Arduino Nano 3.0 ATmega328P
+-----------------------------------------
+![user input clear](https://corerd.github.io/WeMosD1/img/hc05-Nano_bb.png)
+
+<table>
+  <tr>
+    <th colspan="2">HC-05</th>
+    <th colspan="3">Arduino Nano</th>
+  </tr>
+  <tr>
+    <td><b>PIN</b></td> <td><b>Mode</b></td> <td><b>GPIO</b></td> <td><b>Mode</b></td>  <td><b>Function</b></td>
+  </tr>
+  <tr>
+    <td>VCC</td> <td>-</td> <td>5V</td> <td>-</td> <td>Power supply</td>
+  </tr>
+  <tr>
+    <td>GND</td> <td>-</td> <td>GND</td> <td>-</td> <td>Ground</td>
+  </tr>
+  <tr>
+    <td>TXD</td> <td>Output</td> <td>D3</td> <td>Input</td> <td>RX Serial Data</td>
+  </tr>
+  <tr>
+    <td>RXD</td> <td>Input</td> <td>D4</td> <td>Output</td> <td>TX Serial Data</td>
+  </tr>
+  <tr>
+    <td>STATE</td> <td>Output</td> <td>D5</td> <td>Input</td> <td>Get Bluetooth connection state</td>
+  </tr>
+</table>
+
+HC-05 `EN Pin` is left not connected.
+
+Since the HC-05 digital pins run at 3.3v, while the Nano ones run at 5v, it is required a voltage divider to connect the D4 5v output to the the RXD input.
+
+![user input clear](https://corerd.github.io/WeMosD1/img/hc05-Nano_schem.jpg)
